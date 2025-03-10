@@ -5,6 +5,7 @@
 
 #include <SFML/Graphics.hpp>
 #include "Player.h"
+#include "Level.h"
 
 class Game
 {
@@ -24,5 +25,6 @@ private:
 	sf::RenderWindow m_window; // main SFML window
 	bool m_exitGame; // control exiting game
 
+	Level m_levelOne;
 	Player m_playerOne;
 };

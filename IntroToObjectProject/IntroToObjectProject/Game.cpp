@@ -100,6 +100,7 @@ void Game::render()
 {
 	m_window.clear(sf::Color::White);
 
+	m_window.draw(m_levelOne.getDefFloor());
 	m_window.draw(m_playerOne.getPlayerDefault());
 
 	m_window.display();

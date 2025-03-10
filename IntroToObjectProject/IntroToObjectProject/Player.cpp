@@ -1,11 +1,11 @@
 #include "Player.h"
 
-Player::Player()
+Player::Player() // Default constructor
 {
 	loadPlayerDefault();
 }
 
-void Player::loadPlayerDefault()
+void Player::loadPlayerDefault() // Sets default player shape
 {
 	m_playerDefault.setFillColor(sf::Color::Blue);
 	m_playerDefault.setSize(sf::Vector2f{ 64.0f, 64.0f });
@@ -13,7 +13,7 @@ void Player::loadPlayerDefault()
 	m_playerDefault.setPosition(400.0f, 300.0f);
 }
 
-sf::RectangleShape Player::getPlayerDefault()
+sf::RectangleShape Player::getPlayerDefault() // Returns default player shape
 {
 	return m_playerDefault;
 }

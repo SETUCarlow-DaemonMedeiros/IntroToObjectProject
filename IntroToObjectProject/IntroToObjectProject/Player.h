@@ -14,6 +14,4 @@ public:
 private:
 
 	sf::RectangleShape m_playerDefault;
-	
-
 };
