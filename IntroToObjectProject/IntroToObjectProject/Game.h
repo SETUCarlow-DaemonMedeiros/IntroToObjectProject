@@ -25,6 +25,10 @@ private:
 	sf::RenderWindow m_window; // main SFML window
 	bool m_exitGame; // control exiting game
 
+	sf::RenderTexture m_renderTarget;
+	sf::Sprite m_renderTargetSprite;
+	sf::View scaledView;
+
 	Level m_levelOne;
 	Player m_playerOne;
 };
