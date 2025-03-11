@@ -9,9 +9,8 @@ Level::Level() // Default constructor
 void Level::setDefFloor() // Sets default floor shape
 {
 	m_floorDef.setFillColor(sf::Color::Green);
-	m_floorDef.setSize(sf::Vector2f{ 240.0f, 41.0f });
-	m_floorDef.setOrigin(120.0, 41.0);
-	m_floorDef.setPosition(120.0f, 135.0f);
+	m_floorDef.setSize(sf::Vector2f{ 480.0f, 82.0f });
+	m_floorDef.setPosition(0.0f, 188.0f);
 }
 
 sf::RectangleShape Level::getDefFloor() // Returns default floor shape
@@ -27,8 +26,7 @@ void Level::setColumnDetail() // Default values for column texture/sprite
 	}
 
 	m_columnSprite.setTexture(m_columnTexture);
-	m_columnSprite.setOrigin(120.0f, 67.5f);
-	m_columnSprite.setPosition(120.0f, 67.5f);
+	m_columnSprite.setScale(2.0f, 2.0f);
 }
 
 sf::Sprite Level::getColumnDetail() // Returns column sprite

@@ -11,7 +11,7 @@ Game::Game() :
 	m_exitGame{ false } //when true game will exit
 {
 	/// Creating a viewport that scales images to the window size
-	sf::View scaledView(sf::Vector2f{ 120.0f,67.5f }, sf::Vector2f{ 240,135 }); // First vector is where the center of camera is, second value is full resolution size
+	sf::View scaledView(sf::Vector2f{ 240,135 }, sf::Vector2f{ 480,270 }); // First vector is where the center of camera is, second value is full resolution size
 	m_window.setView(scaledView);// sets a view on existing window
 	m_renderTarget.create(640, 480); // New resolution regardless of window size
 	m_renderTargetSprite.setTexture(m_renderTarget.getTexture());
@@ -98,6 +98,8 @@ void Game::update(sf::Time t_deltaTime)
 	{
 		m_window.close();
 	}
+
+	m_playerOne.animatePlayer();
 }
 
 /// <summary>
@@ -109,7 +111,7 @@ void Game::render()
 
 	m_renderTarget.draw(m_levelOne.getDefFloor());
 	m_renderTarget.draw(m_levelOne.getColumnDetail());
-	m_renderTarget.draw(m_playerOne.getPlayerDefault());
+	m_renderTarget.draw(m_playerOne.getPlayerDetail());
 
 
 	m_renderTarget.display();
