@@ -12,6 +12,8 @@ public:
 	// Floor
 	void setDefFloor();
 	sf::RectangleShape getDefFloor();
+	void setFloorDetail();
+	sf::Sprite Level::getFloorDetail();
 
 	// Columns
 	void setColumnDetail();
@@ -21,6 +23,8 @@ private:
 
 	// Floor
 	sf::RectangleShape m_floorDef;
+	sf::Texture m_tileTexture;
+	sf::Sprite m_tileSprite;
 
 	// Columns
 	sf::Texture m_columnTexture;

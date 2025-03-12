@@ -4,6 +4,7 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
+#include <SFML/Window/Event.hpp>
 #include "Player.h"
 #include "Level.h"
 
