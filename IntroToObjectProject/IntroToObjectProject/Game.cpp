@@ -69,6 +69,10 @@ void Game::processEvents()
 		{
 			processKeys(newEvent);
 		}
+		if (sf::Event::KeyReleased == newEvent.type)
+		{
+			processKeyReleases(newEvent);
+		}
 	}
 }
 
@@ -82,7 +86,21 @@ void Game::processKeys(sf::Event t_event)
 	{
 		m_exitGame = true;
 	}
+
+	if (sf::Keyboard::Right == t_event.key.code)
+	{
+		m_playerOne.setPlayerHeading(3);
+	}
 }
+
+void Game::processKeyReleases(sf::Event t_event)
+{
+	if (sf::Keyboard::Right == t_event.key.code)
+	{
+		m_playerOne.setPlayerHeading(9);
+	}
+}
+
 
 /// <summary>
 /// Updates the game world
@@ -100,6 +118,7 @@ void Game::update(sf::Time t_deltaTime)
 	}
 
 	m_playerOne.animatePlayer();
+	m_playerOne.movePlayer();
 }
 
 /// <summary>
