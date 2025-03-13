@@ -9,7 +9,7 @@ Player::Player() // Default constructor
 void Player::loadPlayerDefault() // Sets default player shape
 {
 	m_playerDefault.setFillColor(sf::Color::Blue);
-	m_playerDefault.setSize(sf::Vector2f{ 16.0f, 32.0f });
+	m_playerDefault.setSize(sf::Vector2f{ 64.0f, 32.0f });
 	m_playerDefault.setOrigin(8.0, 32.0);
 	m_playerDefault.setPosition(240.0f, 250.0f);
 }
@@ -27,13 +27,28 @@ void Player::loadPlayerDetail()
 	}
 
 	m_knightSprite.setTexture(m_knightTexture);
-	m_knightSprite.setOrigin(32, 64);
-	m_knightSprite.setPosition(m_playerDefault.getPosition());
+	m_knightSprite.setOrigin(32, 32);
+	m_knightSprite.setPosition(240.0f, 200.0f);
+
+	if (!m_swordTexture.loadFromFile("ASSETS\\IMAGES\\sword.png"))
+	{
+		std::cout << "Issue loading sword texture" << std::endl;
+	}
+
+	m_swordSprite.setTexture(m_swordTexture);
+	m_swordSprite.setOrigin(32, 32);
+	m_swordSprite.setRotation(10);
+	m_swordSprite.setPosition(m_knightSprite.getPosition().x + 5, m_knightSprite.getPosition().y);
 }
 
 sf::Sprite Player::getPlayerDetail()
 {
 	return m_knightSprite;
+}
+
+sf::Sprite Player::getSword()
+{
+	return m_swordSprite;
 }
 
 void Player::setPlayerHeading(int t_heading)
@@ -109,11 +124,12 @@ void Player::movePlayerUp()
 	int posx = m_knightSprite.getPosition().x;
 	int posy = m_knightSprite.getPosition().y;
 
-	if (m_knightSprite.getPosition().y > 160.0f)
+	if (m_knightSprite.getPosition().y > 130.0f)
 	{
 		m_playerHeading = "North";
 		posy -= speed;
 		m_knightSprite.setPosition(posx, posy);
+		m_swordSprite.setPosition(m_knightSprite.getPosition());
 	}
 }
 
@@ -122,11 +138,12 @@ void Player::movePlayerDown()
 	int posx = m_knightSprite.getPosition().x;
 	int posy = m_knightSprite.getPosition().y;
 
-	if (m_knightSprite.getPosition().y < 270.0f)
+	if (m_knightSprite.getPosition().y < 238.0f)
 	{
 		m_playerHeading = "South";
 		posy += speed;
 		m_knightSprite.setPosition(posx, posy);
+		m_swordSprite.setPosition(m_knightSprite.getPosition());
 	}
 }
 
@@ -140,7 +157,10 @@ void Player::movePlayerRight()
 		m_playerHeading = "East";
 		posx += speed;
 		m_knightSprite.setPosition(posx, posy);
-		m_knightSprite.setScale(1.0, 1.0f);
+		m_swordSprite.setPosition(m_knightSprite.getPosition());
+		m_knightSprite.setScale (1.0, 1.0f);
+		m_swordSprite.setScale (1.0f, 1.0f);
+		m_swordSprite.setRotation(10);
 	}
 }
 
@@ -154,6 +174,9 @@ void Player::movePlayerLeft()
 		m_playerHeading = "West";
 		posx -= speed;
 		m_knightSprite.setPosition(posx, posy);
+		m_swordSprite.setPosition(m_knightSprite.getPosition());
 		m_knightSprite.setScale(-1.0, 1.0f);
+		m_swordSprite.setScale(-1.0f, 1.0f);
+		m_swordSprite.setRotation(-10);
 	}
 }

@@ -156,6 +156,8 @@ void Game::render()
 	m_renderTarget.draw(m_levelOne.getSunset());
 	m_renderTarget.draw(m_levelOne.getFloorDetail());
 	m_renderTarget.draw(m_levelOne.getColumnDetail());
+	
+	m_renderTarget.draw(m_playerOne.getSword());
 	m_renderTarget.draw(m_playerOne.getPlayerDetail());
 
 

@@ -15,6 +15,7 @@ public:
 
 	void loadPlayerDetail();
 	sf::Sprite getPlayerDetail();
+	sf::Sprite getSword();
 
 	// Direction/Actions
 	void setPlayerHeading(int t_heading);
@@ -33,9 +34,11 @@ private:
 
 	// Player shape
 	sf::RectangleShape m_playerDefault;
-
 	sf::Texture m_knightTexture;
 	sf::Sprite m_knightSprite;
+	sf::Texture m_swordTexture;
+	sf::Sprite m_swordSprite;
+	bool m_swordFront{ false };
 
 	// Directions/Actions
 	std::string m_playerHeading = "None";
