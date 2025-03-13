@@ -41,31 +41,20 @@ void Player::setPlayerHeading(int t_heading)
 	switch (t_heading)
 	{
 	case 1:
-		m_playerHeading = "North";
+		m_playerHeading = "None";
 		break;
 	case 2:
-		m_playerHeading = "NorthEast";
+		m_playerHeading = "North";
 		break;
 	case 3:
-		m_playerHeading = "East";
-		break;
-	case 4:
-		m_playerHeading = "SouthEast";
-		break;
-	case 5:
 		m_playerHeading = "South";
 		break;
-	case 6:
-		m_playerHeading = "SouthWest";
+	case 4:
+		m_playerHeading = "East";
 		break;
-	case 7:
+	case 5:
 		m_playerHeading = "West";
 		break;
-	case 8:
-		m_playerHeading = "Northwest";
-		break;
-	case 9:
-		m_playerHeading = "None";
 	default:
 		m_playerHeading = "None";
 		break;
@@ -92,69 +81,79 @@ void Player::animatePlayer()
 		m_animationFrame = 5;
 		m_frameIncrement = 0.15f;
 		rowNum = 0;
+	}
 
-		if (frame >= m_animationFrame)
-		{
-			frame = 0;
-			m_frameCounter = 0.0f;
-		}
+	if (m_playerHeading == "North" || m_playerHeading == "South" || m_playerHeading == "East" || m_playerHeading == "West")
+	{
 
-		if (frame != m_knightFrame)
-		{
-			m_knightFrame = frame;
-			m_knightSprite.setTextureRect(sf::IntRect{ frame * SIZE, rowNum, SIZE, SIZE });
-		}
+		m_animationFrame = 6;
+		m_frameIncrement = 0.2f;
+		rowNum = 64;
+	}
+
+	if (frame >= m_animationFrame)
+	{
+		frame = 0;
+		m_frameCounter = 0.0f;
+	}
+
+	if (frame != m_knightFrame)
+	{
+		m_knightFrame = frame;
+		m_knightSprite.setTextureRect(sf::IntRect{ frame * SIZE, rowNum, SIZE, SIZE });
 	}
 }
 
-void Player::movePlayer()
+void Player::movePlayerUp()
 {
 	int posx = m_knightSprite.getPosition().x;
 	int posy = m_knightSprite.getPosition().y;
 
-	if (m_playerHeading == "North")
+	if (m_knightSprite.getPosition().y > 160.0f)
 	{
+		m_playerHeading = "North";
 		posy -= speed;
+		m_knightSprite.setPosition(posx, posy);
 	}
+}
 
-	else if (m_playerHeading == "NorthEast")
-	{
-		posx += speed;
-		posy -= speed;
-	}
+void Player::movePlayerDown()
+{
+	int posx = m_knightSprite.getPosition().x;
+	int posy = m_knightSprite.getPosition().y;
 
-	else if (m_playerHeading == "East")
+	if (m_knightSprite.getPosition().y < 270.0f)
 	{
-		posx += speed;
-	}
-
-	else if (m_playerHeading == "SouthEast")
-	{
-		posx += speed;
+		m_playerHeading = "South";
 		posy += speed;
+		m_knightSprite.setPosition(posx, posy);
 	}
+}
 
-	else if (m_playerHeading == "South")
+void Player::movePlayerRight()
+{
+	int posx = m_knightSprite.getPosition().x;
+	int posy = m_knightSprite.getPosition().y;
+
+	if (m_knightSprite.getPosition().x < 465.0f)
 	{
-		posy += speed;
+		m_playerHeading = "East";
+		posx += speed;
+		m_knightSprite.setPosition(posx, posy);
+		m_knightSprite.setScale(1.0, 1.0f);
 	}
+}
 
-	else if (m_playerHeading == "SouthWest")
+void Player::movePlayerLeft()
+{
+	int posx = m_knightSprite.getPosition().x;
+	int posy = m_knightSprite.getPosition().y;
+
+	if (m_knightSprite.getPosition().x > 16.0f)
 	{
+		m_playerHeading = "West";
 		posx -= speed;
-		posy += speed;
+		m_knightSprite.setPosition(posx, posy);
+		m_knightSprite.setScale(-1.0, 1.0f);
 	}
-
-	else if (m_playerHeading == "West")
-	{
-		posx -= speed;
-	}
-
-	else if (m_playerHeading == "NorthWest")
-	{
-		posx -= speed;
-		posy -= speed;
-	}
-
-	m_knightSprite.setPosition(posx, posy);
 }

@@ -86,18 +86,25 @@ void Game::processKeys(sf::Event t_event)
 	{
 		m_exitGame = true;
 	}
-
-	if (sf::Keyboard::Right == t_event.key.code)
-	{
-		m_playerOne.setPlayerHeading(3);
-	}
 }
 
 void Game::processKeyReleases(sf::Event t_event)
 {
+	if (sf::Keyboard::Up == t_event.key.code)
+	{
+		m_playerOne.setPlayerHeading(1);
+	}
+	if (sf::Keyboard::Down == t_event.key.code)
+	{
+		m_playerOne.setPlayerHeading(1);
+	}
 	if (sf::Keyboard::Right == t_event.key.code)
 	{
-		m_playerOne.setPlayerHeading(9);
+		m_playerOne.setPlayerHeading(1);
+	}
+	if (sf::Keyboard::Left == t_event.key.code)
+	{
+		m_playerOne.setPlayerHeading(1);
 	}
 }
 
@@ -118,7 +125,24 @@ void Game::update(sf::Time t_deltaTime)
 	}
 
 	m_playerOne.animatePlayer();
-	m_playerOne.movePlayer();
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+	{
+		m_playerOne.movePlayerUp();
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+	{
+		m_playerOne.movePlayerDown();
+	}
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+	{
+		m_playerOne.movePlayerRight();
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+	{
+		m_playerOne.movePlayerLeft();
+	}
 }
 
 /// <summary>

@@ -24,7 +24,10 @@ public:
 	void animatePlayer();
 
 	// Movement
-	void movePlayer();
+	void movePlayerUp();
+	void movePlayerDown();
+	void movePlayerRight();
+	void movePlayerLeft();
 
 private:
 
@@ -44,5 +47,5 @@ private:
 	float m_frameIncrement = 0.3f;
 
 	// Move player
-	int speed = 1;
+	int speed = 3;
 };
