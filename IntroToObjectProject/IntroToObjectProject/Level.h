@@ -13,7 +13,12 @@ public:
 	void setDefFloor();
 	sf::RectangleShape getDefFloor();
 	void setFloorDetail();
-	sf::Sprite Level::getFloorDetail();
+	sf::Sprite getFloorDetail();
+
+	// Sky
+	void setSkyDetail();
+	sf::Sprite getSunrise();
+	sf::Sprite getSunset();
 
 	// Columns
 	void setColumnDetail();
@@ -29,5 +34,11 @@ private:
 	// Columns
 	sf::Texture m_columnTexture;
 	sf::Sprite m_columnSprite;
+
+	// Sky
+	sf::Texture m_sunriseTexture;
+	sf::Sprite m_sunriseSprite;
+	sf::Texture m_sunsetTexture;
+	sf::Sprite m_sunsetSprite;
 
 };
