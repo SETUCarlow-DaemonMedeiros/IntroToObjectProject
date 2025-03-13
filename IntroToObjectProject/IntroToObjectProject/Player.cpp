@@ -29,26 +29,11 @@ void Player::loadPlayerDetail()
 	m_knightSprite.setTexture(m_knightTexture);
 	m_knightSprite.setOrigin(32, 32);
 	m_knightSprite.setPosition(240.0f, 200.0f);
-
-	if (!m_swordTexture.loadFromFile("ASSETS\\IMAGES\\sword.png"))
-	{
-		std::cout << "Issue loading sword texture" << std::endl;
-	}
-
-	m_swordSprite.setTexture(m_swordTexture);
-	m_swordSprite.setOrigin(32, 32);
-	m_swordSprite.setRotation(10);
-	m_swordSprite.setPosition(m_knightSprite.getPosition().x + 5, m_knightSprite.getPosition().y);
 }
 
 sf::Sprite Player::getPlayerDetail()
 {
 	return m_knightSprite;
-}
-
-sf::Sprite Player::getSword()
-{
-	return m_swordSprite;
 }
 
 void Player::setPlayerHeading(int t_heading)
@@ -70,6 +55,9 @@ void Player::setPlayerHeading(int t_heading)
 	case 5:
 		m_playerHeading = "West";
 		break;
+	case 6:
+		m_playerHeading = "Throwing";
+		break;
 	default:
 		m_playerHeading = "None";
 		break;
@@ -81,6 +69,11 @@ std::string Player::getPlayerHeading()
 	return m_playerHeading;
 }
 
+void Player::setThrowing(bool t_throwing)
+{
+	m_throwing = t_throwing;
+}
+
 void Player::animatePlayer()
 {
 	int frame = 0;
@@ -90,33 +83,54 @@ void Player::animatePlayer()
 	m_frameCounter += m_frameIncrement; // Increases frame count by increment amount (speed it cycles through frames)
 	frame = static_cast<int>(m_frameCounter); // Current frame count
 
-	if (m_playerHeading == "None")
+	if (m_throwing == false)
 	{
+		if (m_playerHeading == "None")
+		{
 
-		m_animationFrame = 5;
-		m_frameIncrement = 0.15f;
-		rowNum = 0;
+			m_animationFrame = 5;
+			m_frameIncrement = 0.15f;
+			rowNum = 0;
+
+			if (frame >= m_animationFrame)
+			{
+				frame = 0;
+				m_frameCounter = 0.0f;
+			}
+		}
+
+		if (m_playerHeading == "North" || m_playerHeading == "South" || m_playerHeading == "East" || m_playerHeading == "West")
+		{
+
+			m_animationFrame = 6;
+			m_frameIncrement = 0.2f;
+			rowNum = 64;
+
+			if (frame >= m_animationFrame)
+			{
+				frame = 0;
+				m_frameCounter = 0.0f;
+			}
+		}
 	}
 
-	if (m_playerHeading == "North" || m_playerHeading == "South" || m_playerHeading == "East" || m_playerHeading == "West")
+	if (m_throwing == true)
 	{
+		m_playerHeading = "Throwing";
 
 		m_animationFrame = 6;
-		m_frameIncrement = 0.2f;
-		rowNum = 64;
-	}
+		m_frameIncrement = 0.3f;
+		rowNum = 128;
 
-	if (frame >= m_animationFrame)
-	{
-		frame = 0;
-		m_frameCounter = 0.0f;
+		if (frame >= m_animationFrame)
+		{
+			frame = 0;
+			m_frameCounter = 0.0f;
+			m_playerHeading = "None";
+			m_throwing = false;
+		}
 	}
-
-	if (frame != m_knightFrame)
-	{
-		m_knightFrame = frame;
-		m_knightSprite.setTextureRect(sf::IntRect{ frame * SIZE, rowNum, SIZE, SIZE });
-	}
+	m_knightSprite.setTextureRect(sf::IntRect{ frame * SIZE, rowNum, SIZE, SIZE });
 }
 
 void Player::movePlayerUp()
@@ -129,7 +143,6 @@ void Player::movePlayerUp()
 		m_playerHeading = "North";
 		posy -= speed;
 		m_knightSprite.setPosition(posx, posy);
-		m_swordSprite.setPosition(m_knightSprite.getPosition());
 	}
 }
 
@@ -143,7 +156,6 @@ void Player::movePlayerDown()
 		m_playerHeading = "South";
 		posy += speed;
 		m_knightSprite.setPosition(posx, posy);
-		m_swordSprite.setPosition(m_knightSprite.getPosition());
 	}
 }
 
@@ -157,10 +169,7 @@ void Player::movePlayerRight()
 		m_playerHeading = "East";
 		posx += speed;
 		m_knightSprite.setPosition(posx, posy);
-		m_swordSprite.setPosition(m_knightSprite.getPosition());
 		m_knightSprite.setScale (1.0, 1.0f);
-		m_swordSprite.setScale (1.0f, 1.0f);
-		m_swordSprite.setRotation(10);
 	}
 }
 
@@ -174,9 +183,6 @@ void Player::movePlayerLeft()
 		m_playerHeading = "West";
 		posx -= speed;
 		m_knightSprite.setPosition(posx, posy);
-		m_swordSprite.setPosition(m_knightSprite.getPosition());
 		m_knightSprite.setScale(-1.0, 1.0f);
-		m_swordSprite.setScale(-1.0f, 1.0f);
-		m_swordSprite.setRotation(-10);
 	}
 }

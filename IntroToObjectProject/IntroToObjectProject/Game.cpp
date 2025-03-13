@@ -106,8 +106,11 @@ void Game::processKeyReleases(sf::Event t_event)
 	{
 		m_playerOne.setPlayerHeading(1);
 	}
+	if (sf::Keyboard::Space == t_event.key.code)
+	{
+		m_playerOne.setThrowing(true);
+	}
 }
-
 
 /// <summary>
 /// Updates the game world
@@ -123,7 +126,6 @@ void Game::update(sf::Time t_deltaTime)
 	{
 		m_window.close();
 	}
-
 	m_playerOne.animatePlayer();
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
@@ -134,7 +136,6 @@ void Game::update(sf::Time t_deltaTime)
 	{
 		m_playerOne.movePlayerDown();
 	}
-
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 	{
 		m_playerOne.movePlayerRight();
@@ -156,8 +157,6 @@ void Game::render()
 	m_renderTarget.draw(m_levelOne.getSunset());
 	m_renderTarget.draw(m_levelOne.getFloorDetail());
 	m_renderTarget.draw(m_levelOne.getColumnDetail());
-	
-	m_renderTarget.draw(m_playerOne.getSword());
 	m_renderTarget.draw(m_playerOne.getPlayerDetail());
 
 

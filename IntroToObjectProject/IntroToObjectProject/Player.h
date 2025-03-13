@@ -12,14 +12,13 @@ public:
 	// Player shape
 	void loadPlayerDefault();
 	sf::RectangleShape getPlayerDefault();
-
 	void loadPlayerDetail();
 	sf::Sprite getPlayerDetail();
-	sf::Sprite getSword();
 
 	// Direction/Actions
 	void setPlayerHeading(int t_heading);
 	std::string getPlayerHeading();
+	void setThrowing(bool t_throwing);
 
 	// Animate Player
 	void animatePlayer();
@@ -36,12 +35,10 @@ private:
 	sf::RectangleShape m_playerDefault;
 	sf::Texture m_knightTexture;
 	sf::Sprite m_knightSprite;
-	sf::Texture m_swordTexture;
-	sf::Sprite m_swordSprite;
-	bool m_swordFront{ false };
 
 	// Directions/Actions
 	std::string m_playerHeading = "None";
+	bool m_throwing{ false };
 
 	// Animate Player
 	int m_knightFrame{ -1 };
