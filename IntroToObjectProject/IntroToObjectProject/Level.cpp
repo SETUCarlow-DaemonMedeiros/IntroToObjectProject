@@ -6,6 +6,7 @@ Level::Level() // Default constructor
 	setFloorDetail();
 	setColumnDetail();
 	setSkyDetail();
+	setUpSunrays();
 }
 
 void Level::setDefFloor() // Sets default floor shape
@@ -78,4 +79,80 @@ void Level::setColumnDetail() // Default values for column texture/sprite
 sf::Sprite Level::getColumnDetail() // Returns column sprite
 {
 	return m_columnSprite;
+}
+
+void Level::setUpSunrays()
+{
+	if (!m_sunray1Text.loadFromFile("ASSETS\\IMAGES\\sunray1.png"))
+	{
+		std::cout << "Issue loading sunray #1 image" << std::endl;
+	}
+	if (!m_sunray2Text.loadFromFile("ASSETS\\IMAGES\\sunray2.png"))
+	{
+		std::cout << "Issue loading sunray #2 image" << std::endl;
+	}
+
+	m_sunray1Sprite.setTexture(m_sunray1Text);
+	m_sunray2Sprite.setTexture(m_sunray2Text);
+	m_opacity.a = 50.0f;
+	m_opacity2.a = 25.0f;
+	m_sunray1Sprite.setColor(m_opacity);
+	m_sunray1Sprite.setColor(m_opacity2);
+}
+
+sf::Sprite Level::getSunrayOne()
+{
+	return m_sunray1Sprite;
+}
+
+sf::Sprite Level::getSunrayTwo()
+{
+	return m_sunray2Sprite;
+}
+
+void Level::animateSunrays()
+{
+	int flash = 1;
+
+	if (fadeOut == true)
+	{
+		m_opacity.a -= flash;
+
+		if (m_opacity.a <= 25) 
+		{
+			fadeOut = false;
+		}
+	}
+
+	if (fadeOut == false)
+	{
+		m_opacity.a += flash;
+
+		if (m_opacity.a >= 50)
+		{
+			fadeOut = true;
+		}
+	}
+	if (fadeOut2 == true)
+	{
+		m_opacity2.a -= flash;
+
+		if (m_opacity2.a <= 25)
+		{
+			fadeOut2 = false;
+		}
+	}
+
+	if (fadeOut2 == false)
+	{
+		m_opacity2.a += flash;
+
+		if (m_opacity2.a >= 50)
+		{
+			fadeOut2 = true;
+		}
+	}
+
+	m_sunray1Sprite.setColor(m_opacity);
+	m_sunray2Sprite.setColor(m_opacity2);
 }

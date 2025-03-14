@@ -3,6 +3,9 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
+#include <cstdlib>
+#include <ctime>
+
 class Level
 {
 public:
@@ -24,6 +27,13 @@ public:
 	void setColumnDetail();
 	sf::Sprite getColumnDetail();
 
+	// Sunrays
+	void setUpSunrays();
+	void animateSunrays();
+	sf::Sprite Level::getSunrayOne();
+	sf::Sprite Level::getSunrayTwo();
+
+
 private:
 
 	// Floor
@@ -41,4 +51,13 @@ private:
 	sf::Texture m_sunsetTexture;
 	sf::Sprite m_sunsetSprite;
 
+	// Sunrays
+	sf::Texture m_sunray1Text;
+	sf::Sprite m_sunray1Sprite;
+	sf::Texture m_sunray2Text;
+	sf::Sprite m_sunray2Sprite;
+	sf::Color m_opacity{ 255,255,255,255 }; // White
+	sf::Color m_opacity2{ 255,255,255,255 }; // White
+	bool fadeOut{ true };
+	bool fadeOut2{ true };
 };

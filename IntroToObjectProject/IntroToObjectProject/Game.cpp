@@ -29,6 +29,8 @@ Game::Game() :
 /// </summary>
 void Game::run()
 {
+	srand(time(nullptr));
+
 	sf::Clock clock;
 	sf::Time timeSinceLastUpdate = sf::Time::Zero;
 	const float fps{ 60.0f };
@@ -144,6 +146,8 @@ void Game::update(sf::Time t_deltaTime)
 	{
 		m_playerOne.movePlayerLeft();
 	}
+
+	m_levelOne.animateSunrays();
 }
 
 /// <summary>
@@ -157,6 +161,8 @@ void Game::render()
 	m_renderTarget.draw(m_levelOne.getSunset());
 	m_renderTarget.draw(m_levelOne.getFloorDetail());
 	m_renderTarget.draw(m_levelOne.getColumnDetail());
+	m_renderTarget.draw(m_levelOne.getSunrayOne());
+	m_renderTarget.draw(m_levelOne.getSunrayTwo());
 	m_renderTarget.draw(m_playerOne.getPlayerDetail());
 
 
