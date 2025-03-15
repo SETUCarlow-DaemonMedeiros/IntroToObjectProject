@@ -148,6 +148,7 @@ void Game::update(sf::Time t_deltaTime)
 	}
 
 	m_levelOne.animateSunrays();
+	m_levelOne.animateCandles();
 }
 
 /// <summary>
@@ -157,8 +158,11 @@ void Game::render()
 {
 	m_renderTarget.clear(sf::Color::White);
 
-	// m_renderTarget.draw(m_levelOne.getSunrise());
-	m_renderTarget.draw(m_levelOne.getSunset());
+	m_renderTarget.draw(m_levelOne.getSunrise());
+	// m_renderTarget.draw(m_levelOne.getSunset());
+	m_renderTarget.draw(m_levelOne.getClouds1());
+	m_renderTarget.draw(m_levelOne.getCandles());
+
 	m_renderTarget.draw(m_levelOne.getFloorDetail());
 	m_renderTarget.draw(m_levelOne.getColumnDetail());
 	m_renderTarget.draw(m_levelOne.getSunrayOne());

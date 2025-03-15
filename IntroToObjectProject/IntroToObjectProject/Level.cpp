@@ -7,6 +7,8 @@ Level::Level() // Default constructor
 	setColumnDetail();
 	setSkyDetail();
 	setUpSunrays();
+	setupClouds();
+	setupCandles();
 }
 
 void Level::setDefFloor() // Sets default floor shape
@@ -156,3 +158,58 @@ void Level::animateSunrays()
 	m_sunray1Sprite.setColor(m_opacity);
 	m_sunray2Sprite.setColor(m_opacity2);
 }
+
+void Level::setupClouds()
+{
+	if (!m_cloud1Text.loadFromFile("ASSETS\\IMAGES\\clouds.png"))
+	{
+		std::cout << "Issue loading cloud image" << std::endl;
+	}
+	m_cloud1Sprite.setTexture(m_cloud1Text);
+	
+	m_cloud1Sprite.setOrigin(960, 0);
+	m_cloud1Sprite.setPosition(960, 0);
+}
+
+sf::Sprite Level::getClouds1()
+{
+	return m_cloud1Sprite;
+}
+
+void Level::setupCandles()
+{
+	if (!m_candleText.loadFromFile("ASSETS\\IMAGES\\candles.png"))
+	{
+		std::cout << "Issue loading candle image" << std::endl;
+	}
+	m_candleSprite.setTexture(m_candleText);
+}
+
+sf::Sprite Level::getCandles()
+{
+	return m_candleSprite;
+}
+
+void Level::animateCandles()
+{
+	int frame = 0;
+	int rowNum = 0;
+	const int HEIGHT = 64;
+	const int WIDTH = 480;
+
+	m_frameCounter += m_frameIncrement; // Increases frame count by increment amount (speed it cycles through frames)
+	frame = static_cast<int>(m_frameCounter); // Current frame count
+
+	m_animationFrame = 8;
+	m_frameIncrement = 0.15f;
+	rowNum = 0;
+
+	if (frame >= m_animationFrame)
+	{
+		frame = 0;
+		m_frameCounter = 0.0f;
+	}
+
+	m_candleSprite.setTextureRect(sf::IntRect{rowNum, frame * HEIGHT, WIDTH, HEIGHT });
+}
+

@@ -33,6 +33,14 @@ public:
 	sf::Sprite Level::getSunrayOne();
 	sf::Sprite Level::getSunrayTwo();
 
+	// Clouds
+	void setupClouds();
+	sf::Sprite getClouds1();
+
+	// Candles
+	void setupCandles();
+	sf::Sprite getCandles();
+	void animateCandles();
 
 private:
 
@@ -60,4 +68,18 @@ private:
 	sf::Color m_opacity2{ 255,255,255,255 }; // White
 	bool fadeOut{ true };
 	bool fadeOut2{ true };
+
+	// Clouds
+	sf::Texture m_cloud1Text;
+	sf::Sprite m_cloud1Sprite;
+
+	// Candles
+	sf::Texture m_candleText;
+	sf::Sprite m_candleSprite;
+
+	// Animate Candles
+	int m_candleFrame{ -1 };
+	int m_animationFrame = 8;
+	float m_frameCounter = 0.0f;
+	float m_frameIncrement = 0.15f;
 };
