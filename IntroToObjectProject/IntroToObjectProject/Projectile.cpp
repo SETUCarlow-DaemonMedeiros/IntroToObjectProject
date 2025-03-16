@@ -13,6 +13,7 @@ void Projectile::setupDart()
 	}
 	m_dartSprite.setTexture(m_dartTexture);
 	m_dartSprite.setOrigin(32, 22);
+	m_dartSprite.setPosition(240, 200);
 }
 
 sf::Sprite Projectile::getDart()
@@ -43,4 +44,33 @@ void Projectile::setThrown(bool t_thrown)
 bool Projectile::getThrown()
 {
 	return m_dartThrown;
+}
+
+void Projectile::moveDartRight()
+{
+	int posx = m_dartSprite.getPosition().x;
+	int posy = m_dartSprite.getPosition().y;
+
+	m_dartSprite.setScale(1.0f, 1.0f);
+
+	if (m_isFiring == true)
+	{
+		if (m_dartThrown == false)
+		{
+			posx += m_dartSpeed;
+			m_dartSprite.setPosition(posx, posy);
+
+			if (m_dartSprite.getPosition().x > 480)
+			{
+				m_dartThrown = true;
+				resetAmmo();
+			}
+		}
+	}
+}
+
+void Projectile::resetAmmo()
+{
+	
+	m_dartSprite.setPosition(240, 200);
 }

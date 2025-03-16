@@ -38,4 +38,5 @@ private:
 	static const int m_MAX_DARTS = 5;
 	int m_noOfDarts = 5;
 	Projectile m_dart[m_MAX_DARTS];
+	int m_currentDart = 0;
 };

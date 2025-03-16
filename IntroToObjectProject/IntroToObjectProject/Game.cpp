@@ -111,6 +111,12 @@ void Game::processKeyReleases(sf::Event t_event)
 	if (sf::Keyboard::Space == t_event.key.code)
 	{
 		m_playerOne.setThrowing(true);
+		
+		if (m_currentDart != m_noOfDarts)
+		{
+			m_dart[m_currentDart].setFiring(true);
+			m_currentDart++;
+		}
 	}
 }
 
@@ -149,6 +155,11 @@ void Game::update(sf::Time t_deltaTime)
 
 	m_levelOne.animateSunrays();
 	m_levelOne.animateCandles();
+
+	for (int i = 0; i < m_noOfDarts; i++)
+	{
+		m_dart[i].moveDartRight();
+	}
 }
 
 /// <summary>
@@ -171,10 +182,9 @@ void Game::render()
 
 	for (int i = 0; i < m_noOfDarts; i++)
 	{
-		if (m_dart[i].getFiring() == true)
+		if (m_dart[i].getThrown() == false)
 		{
-			if(m_dart)
-			m_renderTarget.draw(m_dart[0].getDart());
+			m_renderTarget.draw(m_dart[i].getDart());
 		}
 	}
 
@@ -187,8 +197,4 @@ void Game::render()
 // This is empty: link to class methods that load images and audio.
 void Game::loadAssets()
 {
-	for (int i = 0; i < m_noOfDarts; i++)
-	{
-		m_dart[i].setDartLocation(m_playerOne.getPlayerDetail().getPosition());
-	}
 }

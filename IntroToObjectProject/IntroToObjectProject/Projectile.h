@@ -17,6 +17,8 @@ public:
 	bool getFiring();
 	void setThrown(bool t_thrown);
 	bool getThrown();
+	void moveDartRight();
+	void resetAmmo();
 
 private:
 
@@ -26,4 +28,5 @@ private:
 	bool m_isFiring{ false };
 	bool m_dartThrown{ false };
 
+	int m_dartSpeed = 5;
 };
