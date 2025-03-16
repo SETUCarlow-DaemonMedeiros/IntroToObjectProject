@@ -169,6 +169,15 @@ void Game::render()
 	m_renderTarget.draw(m_levelOne.getSunrayTwo());
 	m_renderTarget.draw(m_playerOne.getPlayerDetail());
 
+	for (int i = 0; i < m_noOfDarts; i++)
+	{
+		if (m_dart[i].getFiring() == true)
+		{
+			if(m_dart)
+			m_renderTarget.draw(m_dart[0].getDart());
+		}
+	}
+
 
 	m_renderTarget.display();
 	m_window.draw(m_renderTargetSprite);
@@ -178,5 +187,8 @@ void Game::render()
 // This is empty: link to class methods that load images and audio.
 void Game::loadAssets()
 {
-
+	for (int i = 0; i < m_noOfDarts; i++)
+	{
+		m_dart[i].setDartLocation(m_playerOne.getPlayerDetail().getPosition());
+	}
 }
